@@ -1,8 +1,8 @@
-const publicationModel = require('../models/publicationModel').publication
-const publicationController = {}
+const favoriteModel = require('../models/favoriteModel').favorite
+const favoriteController = {}
 
-publicationController.get = (req, res) => {
-    publicationModel.get(null, (respuesta) => {
+favoriteController.get = (req, res) => {
+    favoriteModel.get(null, (respuesta) => {
         try {
             res.status(200).json({
                 info: respuesta.info
@@ -13,10 +13,10 @@ publicationController.get = (req, res) => {
 
     })
 }
-publicationController.add = (req, res) => {
+favoriteController.add = (req, res) => {
     const reqVal = {
         description: req.body.description,
-     }
+    }
 
     if (reqVal.description == undefined || reqVal.description == null || reqVal.description == '') {
         res.json({
@@ -26,17 +26,17 @@ publicationController.add = (req, res) => {
         return;
     }
 
-    publicationModel.add(reqVal, (respuesta) => {
+    favoriteModel.add(reqVal, (respuesta) => {
         if (respuesta.state == true) {
             res.json({
                 state: true,
-                mensaje: 'Publicacion Creado Correctamente',
+                mensaje: 'Favorito creado Correctamente',
                 info: reqVal
             })
         } else {
             res.json({
                 state: false,
-                mensaje: 'Error al Crear Publicacion'
+                mensaje: 'Error al Crear favorito'
             })
         }
     })
@@ -44,7 +44,7 @@ publicationController.add = (req, res) => {
 
 
 }
-publicationController.remove = (req, res) => {
+favoriteController.remove = (req, res) => {
     const reqVal = {
         id: req.body.id
     }
@@ -57,11 +57,11 @@ publicationController.remove = (req, res) => {
         return;
     }
 
-    publicationModel.remove(reqVal, (respuesta) => {
+    favoriteModel.remove(reqVal, (respuesta) => {
         if (respuesta.state == true) {
             res.status(200).json({
                 state: true,
-                mensaje: 'Publicacion Se Elimino correctamente'
+                mensaje: 'favorite Se Elimino correctamente'
             })
         } else {
             res.status(500).json({
@@ -73,4 +73,4 @@ publicationController.remove = (req, res) => {
 
     })
 }
-module.exports.publication = publicationController;
+module.exports.favorite = favoriteController;

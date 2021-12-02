@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userModel = require('../models/usersModel');
+const userModel = require('../models/userModel');
 
 const middlewareValidateId = async(req, res, next) => {
     try {
